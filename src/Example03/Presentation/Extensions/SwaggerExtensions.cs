@@ -8,7 +8,7 @@ public static class SwaggerExtensions
         {
             return;
         }
-        
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
@@ -22,7 +22,7 @@ public static class SwaggerExtensions
         {
             return;
         }
-        
+
         app.UseSwagger();
         app.UseSwaggerUI(options =>
         {

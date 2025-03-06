@@ -15,12 +15,12 @@ public sealed class ShapeService : IShapeService
     public async Task<IReadOnlyList<Shape>> GetShapesAsync(string? shapeType, CancellationToken cancellationToken)
     {
         shapeType ??= nameof(ShapeType.All);
-        
+
         if (!Enum.TryParse(shapeType, true, out ShapeType shapeEnumType))
         {
             return [];
         }
-        
+
         var shapes = await _shapeRepository.GetShapesAsync(shapeEnumType, cancellationToken);
         return shapes;
     }

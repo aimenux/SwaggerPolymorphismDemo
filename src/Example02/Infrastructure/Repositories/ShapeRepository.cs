@@ -10,7 +10,7 @@ public sealed class ShapeRepository : IShapeRepository
         var shapes = Enumerable.Range(1, RandomNumber())
             .Select(x => GetShape(shapeType))
             .ToList();
-        
+
         return Task.FromResult<IReadOnlyList<Shape>>(shapes);
     }
 
@@ -44,7 +44,7 @@ public sealed class ShapeRepository : IShapeRepository
             _ => throw new InvalidOperationException()
         };
     }
-    
+
     private static ShapeType RandomShapeType()
     {
         return Enum.GetValues<ShapeType>()

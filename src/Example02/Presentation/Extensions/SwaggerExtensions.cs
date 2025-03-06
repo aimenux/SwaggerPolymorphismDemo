@@ -10,7 +10,7 @@ public static class SwaggerExtensions
         {
             return;
         }
-        
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
@@ -29,14 +29,14 @@ public static class SwaggerExtensions
         {
             return;
         }
-        
+
         app.UseSwagger();
         app.UseSwaggerUI(options =>
         {
             options.DisplayRequestDuration();
         });
     }
-    
+
     private static string? GetDiscriminatorName(Type baseType)
     {
         return baseType == typeof(Shape)

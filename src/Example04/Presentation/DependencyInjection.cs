@@ -13,7 +13,7 @@ public static class DependencyInjection
         builder.AddRouteOptions();
         return services;
     }
-    
+
     private static void AddHttpLogging(this WebApplicationBuilder builder)
     {
         builder.Services.AddHttpLogging(logging =>
@@ -22,7 +22,7 @@ public static class DependencyInjection
             logging.CombineLogs = true;
         });
     }
-    
+
     private static void AddRouteOptions(this WebApplicationBuilder builder)
     {
         builder.Services.Configure<RouteOptions>(options =>
