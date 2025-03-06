@@ -1,0 +1,11 @@
+@BaseUrl = http://localhost:5046
+
+GET {{BaseUrl}}/api/shapes/
+Accept: application/json
+
+###
+
+GET {{BaseUrl}}/api/shapes?shapeType=circle
+Accept: application/json
+
+###
