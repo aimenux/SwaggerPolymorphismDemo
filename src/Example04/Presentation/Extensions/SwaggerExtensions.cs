@@ -15,11 +15,9 @@ public static class SwaggerExtensions
         builder.Services.AddSwaggerGen(options =>
         {
             options.UseOneOfForPolymorphism();
+            options.SelectSubTypesUsing(GetDiscriminatorSubTypes);
             options.SelectDiscriminatorNameUsing(GetDiscriminatorName);
-            options.SelectDiscriminatorValueUsing(subType => subType.Name);
-            options.SelectSubTypesUsing(baseType => baseType == typeof(Shape)
-                ? [typeof(Circle), typeof(Square), typeof(Triangle), typeof(Rectangle)]
-                : []);
+            options.SelectDiscriminatorValueUsing(GetDiscriminatorValue);
         });
     }
 
@@ -36,11 +34,20 @@ public static class SwaggerExtensions
             options.DisplayRequestDuration();
         });
     }
-
-    private static string? GetDiscriminatorName(Type baseType)
+    
+    private static Type[] GetDiscriminatorSubTypes(Type type)
     {
-        return baseType == typeof(Shape)
+        return type == typeof(Shape)
+            ? [typeof(Circle), typeof(Square), typeof(Triangle), typeof(Rectangle)]
+            : [];
+    }
+    
+    private static string? GetDiscriminatorName(Type type)
+    {
+        return type == typeof(Shape)
             ? nameof(Shape.Type).ToLowerInvariant()
             : null;
     }
+
+    private static string GetDiscriminatorValue(Type type) => type.Name;
 }
