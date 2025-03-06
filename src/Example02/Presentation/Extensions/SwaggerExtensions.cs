@@ -41,7 +41,7 @@ public static class SwaggerExtensions
             ? [typeof(Circle), typeof(Square), typeof(Triangle), typeof(Rectangle)]
             : [];
     }
-    
+
     private static string? GetDiscriminatorName(Type type)
     {
         return type == typeof(Shape)
