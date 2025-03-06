@@ -1,3 +1,5 @@
+[![.NET](https://github.com/aimenux/SwaggerPolymorphismDemo/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aimenux/SwaggerPolymorphismDemo/actions/workflows/ci.yml)
+
 # SwaggerPolymorphismDemo
 ```
 Using various ways to handle polymorphic object types in swagger documentation
