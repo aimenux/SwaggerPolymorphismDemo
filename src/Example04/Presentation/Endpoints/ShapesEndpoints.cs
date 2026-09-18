@@ -19,7 +19,7 @@ public static class ShapesEndpoints
     private static RouteHandlerBuilder MapGetShapesEndpoint(this IEndpointRouteBuilder app)
     {
         return app
-            .MapGet("", async (IShapeService shapeService, [FromQuery(Name = "type")] string? shapeType, CancellationToken cancellationToken) =>
+            .MapGet("", async (IShapeService shapeService, [FromQuery(Name = "shape-type")] string? shapeType, CancellationToken cancellationToken) =>
             {
                 var shapes = await shapeService.GetShapesAsync(shapeType, cancellationToken);
                 return Results.Ok(shapes);

@@ -16,4 +16,4 @@ In this repo, i m exploring various ways in order to handle polymorphic object t
 > :four: Example04 : use of fluent way on a minimal api style.
 >
 
-**`Tools`** : net 9.0
+**`Tools`** : net 10.0

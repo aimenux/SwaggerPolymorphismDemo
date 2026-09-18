@@ -1,4 +1,6 @@
-﻿using Example03.Presentation.Extensions;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using Example03.Presentation.Extensions;
 using Microsoft.AspNetCore.HttpLogging;
 
 namespace Example03.Presentation;
@@ -8,10 +10,21 @@ public static class DependencyInjection
     public static IServiceCollection AddPresentation(this WebApplicationBuilder builder)
     {
         var services = builder.Services;
+        builder.AddJsonOptions();
         builder.AddHttpLogging();
         builder.AddSwaggerDoc();
         builder.AddRouteOptions();
         return services;
+    }
+
+    private static void AddJsonOptions(this WebApplicationBuilder builder)
+    {
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        });
     }
 
     private static void AddHttpLogging(this WebApplicationBuilder builder)

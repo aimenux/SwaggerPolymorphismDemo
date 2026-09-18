@@ -16,7 +16,7 @@ public class ShapesController : ControllerBase
     }
 
     [HttpGet(Name = "GetShapes")]
-    public async Task<IEnumerable<Shape>> GetShapesAsync([FromQuery(Name = "type")] string? shapeType, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Shape>> GetShapesAsync([FromQuery(Name = "shape-type")] string? shapeType, CancellationToken cancellationToken)
     {
         var shapes = await _shapeService.GetShapesAsync(shapeType, cancellationToken);
         return shapes;

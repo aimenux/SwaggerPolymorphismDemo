@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{BaseUrl}}/api/shapes?shapeType=circle
+GET {{BaseUrl}}/api/shapes?shape-type=circle
 Accept: application/json
 
 ###

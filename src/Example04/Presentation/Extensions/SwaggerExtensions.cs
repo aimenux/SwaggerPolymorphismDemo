@@ -45,7 +45,7 @@ public static class SwaggerExtensions
     private static string? GetDiscriminatorName(Type type)
     {
         return type == typeof(Shape)
-            ? nameof(Shape.Type).ToLowerInvariant()
+            ? "type"
             : null;
     }
 
