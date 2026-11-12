@@ -16,7 +16,7 @@ public sealed class ShapeService : IShapeService
     {
         shapeType ??= nameof(ShapeType.All);
 
-        if (!Enum.TryParse(shapeType, true, out ShapeType shapeEnumType))
+        if (!Enum.TryParse(shapeType, true, out ShapeType shapeEnumType) || !Enum.IsDefined(shapeEnumType))
         {
             return [];
         }

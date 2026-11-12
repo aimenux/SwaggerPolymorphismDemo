@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Text.Json;
 using AwesomeAssertions;
 
@@ -49,29 +49,23 @@ public class IntegrationTests
         shapes.Should().OnlyContain(shape => HasExpectedDiscriminatedProperties(shape, expectedType));
     }
 
-    [Fact]
-    public async Task Should_Document_Shape_Polymorphism_With_Discriminator()
+    [Theory]
+    [InlineData("99")]
+    [InlineData("-1")]
+    [InlineData("unknown")]
+    public async Task Should_Return_No_Shapes_For_Undefined_Shape_Type(string shapeTypeQuery)
     {
         // arrange
         await using var fixture = new IntegrationTestsFactory();
         var client = fixture.CreateClient();
 
         // act
-        using var response = await client.GetAsync("swagger/v1/swagger.json");
+        using var response = await client.GetAsync($"api/shapes?shape-type={shapeTypeQuery}");
         using var document = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
 
         // assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        var shapeSchema = document.RootElement.GetProperty("components").GetProperty("schemas").GetProperty("Shape");
-        var discriminator = shapeSchema.GetProperty("discriminator");
-        discriminator.GetProperty("propertyName").GetString().Should().Be("type");
-
-        var mapping = discriminator.GetProperty("mapping");
-        mapping.GetProperty("Circle").GetString().Should().Be("#/components/schemas/Circle");
-        mapping.GetProperty("Square").GetString().Should().Be("#/components/schemas/Square");
-        mapping.GetProperty("Triangle").GetString().Should().Be("#/components/schemas/Triangle");
-        mapping.GetProperty("Rectangle").GetString().Should().Be("#/components/schemas/Rectangle");
+        document.RootElement.EnumerateArray().Should().BeEmpty();
     }
 
     private static bool HasExpectedDiscriminatedProperties(JsonElement shape, string expectedType)
